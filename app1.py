@@ -7,7 +7,6 @@ from rag_engine1 import load_docs, split_docs, create_vectorstore, get_chat_chai
 st.set_page_config(page_title="StudyBuddy 📚", layout="wide")
 st.title("📄 Upload your PDF chapter")
 
-# Chat history UI display
 if "chat_history_ui" not in st.session_state:
     st.session_state.chat_history_ui = []
 
@@ -41,14 +40,14 @@ if uploaded_file:
             response = chat_chain.invoke({"question": query})
             answer = response["answer"]
 
-            # Update UI chat history
+       
             st.session_state.chat_history_ui.append(("🧑 You", query))
             st.session_state.chat_history_ui.append(("🤖 Assistant", answer))
 
-        # Show chat history
+       
         for role, msg in st.session_state.chat_history_ui:
             st.markdown(f"**{role}:** {msg}")
 
-if st.button("🧹 Reset App"):
+if st.button(" Reset App"):
     st.session_state.clear()
     st.experimental_rerun()
