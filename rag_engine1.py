@@ -21,7 +21,7 @@ def split_docs(documents, chunk_size=1500, chunk_overlap=300):
 
 
 def create_vectorstore(splits):
-    embeddings = OllamaEmbeddings(model="nomic-embed-text")  # or bge-small-en, etc.
+    embeddings = OllamaEmbeddings(model="nomic-embed-text")
     vectorstore = FAISS.from_documents(splits, embeddings)
     return vectorstore
 
@@ -36,6 +36,6 @@ def get_chat_chain_with_memory(vectorstore):
         retriever=retriever,
         memory=ConversationSummaryBufferMemory(llm=llm,memory_key="chat_history",return_messages=True,max_token_limit=1000 ),
         return_source_documents=False,
-        output_key="answer",  # ✅ FIX: specify which key to store
+        output_key="answer", 
         verbose=False
     )
